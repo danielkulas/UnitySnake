@@ -10,9 +10,9 @@ namespace DanielKulasSnake
         {
             Text score = GetComponent<Text>();
 
-            if(score && PlayerPrefs.HasKey("LastScore"))
+            if(score)
             {
-                score.text += PlayerPrefs.GetInt("LastScore").ToString();
+                score.text += PlayerPrefs.GetInt("LastScore", 0).ToString();
             }
         }
     }

@@ -11,27 +11,31 @@ namespace DanielKulasSnake
         UnityEvent scoringPointsEvent = new UnityEvent();
         [SerializeField]
         private TextScoreSetter textScoreSetter;
-        private string highestScorePrefsName = "HighestScore2";
+        public string highestScorePrefsName{get; private set;} = "HighestScore";
+        public string lastScorePrefsName{get; private set;} = "LastScore";
 
+        void Awake()
+        {
+            PlayerPrefs.SetInt(lastScorePrefsName, 0);
+            highestScore = PlayerPrefs.GetInt(highestScorePrefsName, 0);
+            score = 0;
+        }
 
         void Start()
         {
             textScoreSetter = textScoreSetter.GetComponent<TextScoreSetter>();
             if(textScoreSetter)
                 scoringPointsEvent.AddListener(textScoreSetter.setScore);
-            
-            PlayerPrefs.SetInt("LastScore", 0);
-
-            score = 0;
-            highestScore = PlayerPrefs.GetInt(highestScorePrefsName);
         }
 
         void OnDestroy()
         {
-            PlayerPrefs.SetInt("LastScore", score);
+            PlayerPrefs.SetInt(lastScorePrefsName, score);
 
-            if(score > PlayerPrefs.GetInt(highestScorePrefsName))
+            if(score > PlayerPrefs.GetInt(highestScorePrefsName, 0))
                 PlayerPrefs.SetInt(highestScorePrefsName, score);
+
+            PlayerPrefs.Save();
         }
 
         public void addPoints(int points)

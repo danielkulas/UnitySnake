@@ -6,26 +6,31 @@ namespace DanielKulasSnake
 {
     public class PositionsValidator : MonoBehaviour
     {
-        public GameObject doesSnakeAteApple(List<GameObject> snakeParts, List<GameObject> apples)
+        /// <summary>
+        /// Checks if snake and apples have collided
+        /// This method return Transform of eaten apple, or null
+        /// </summary>
+        public Transform doesSnakeAteApple(List<Transform> snakeParts, List<Transform> apples)
         {
-            GameObject eatenApple = null;
+            Transform eatenApple = null;
 
-            foreach(GameObject snakePart in snakeParts)
+            foreach(Transform apple in apples)
             {
-                foreach(GameObject apple in apples)
+                if(snakeParts[0].transform.position == apple.transform.position)
                 {
-                    if(snakePart.transform.position == apple.transform.position)
-                    {
-                        eatenApple = apple;
-                        return eatenApple;        
-                    }
+                    eatenApple = apple;
+                    return eatenApple;        
                 }
             }
 
             return eatenApple;
         }
 
-        public bool doesSnakeCollidedHimself(List<GameObject> snakeParts)
+        /// <summary>
+        /// Checks if the snake collided with itself
+        /// This method return true if it collided, or false when doesn't
+        /// </summary>
+        public bool doesSnakeCollidedHimself(List<Transform> snakeParts)
         {
             for(int i = 1; i < snakeParts.Count; i++)
             {
@@ -38,7 +43,11 @@ namespace DanielKulasSnake
             return false;
         }
 
-        public bool doesSnakeHitWall(List<GameObject> snakeParts, int noOfFieldsX, int noOfFieldsY)
+        /// <summary>
+        /// Checks if the snake collided with the wall
+        /// This method return true if it collided, or false when doesn't
+        /// </summary>
+        public bool doesSnakeHitWall(List<Transform> snakeParts, int noOfFieldsX, int noOfFieldsY)
         {
             if(snakeParts[0].transform.position.x < 0 || snakeParts[0].transform.position.x >= noOfFieldsX ||
                 snakeParts[0].transform.position.y < 0 || snakeParts[0].transform.position.y >= noOfFieldsY)
@@ -49,7 +58,10 @@ namespace DanielKulasSnake
             return false;
         }
 
-        public Vector3Int getEmptyField(List<GameObject> snakeParts, List<GameObject> apples, int noOfFieldsX, int noOfFieldsY)
+        /// <summary>
+        /// This method returns Vector3Int of empty field on the board
+        /// </summary>
+        public Vector3Int getEmptyField(List<Transform> snakeParts, List<Transform> apples, int noOfFieldsX, int noOfFieldsY)
         {
             bool isNotEmpty;
             int xPos = 0, yPos = 0;
@@ -60,7 +72,7 @@ namespace DanielKulasSnake
                 xPos = Random.Range(0, noOfFieldsX);
                 yPos = Random.Range(0, noOfFieldsY);
 
-                foreach(GameObject snakePart in snakeParts)
+                foreach(Transform snakePart in snakeParts)
                 {
                     if(xPos == snakePart.transform.position.x &&
                         yPos == snakePart.transform.position.y)
@@ -73,7 +85,7 @@ namespace DanielKulasSnake
                 if(isNotEmpty)
                     continue;
 
-                foreach(GameObject apple in apples)
+                foreach(Transform apple in apples)
                 {
                     if(xPos == apple.transform.position.x &&
                         yPos == apple.transform.position.y)

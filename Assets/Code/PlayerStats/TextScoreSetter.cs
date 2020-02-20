@@ -1,18 +1,20 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+
 namespace DanielKulasSnake
 {
     public class TextScoreSetter : MonoBehaviour
     {
         [SerializeField]
-        Text scoreText;
-        private string scoreOnBegin;
+        Text scoreText; //Reference to UI text(current result)
+        private string scoreOnBegin; //UI text before modifying
         [SerializeField]
-        Text highestScoreText;
+        Text highestScoreText; //Reference to UI text(best result)
+        private string highScoreOnBegin; //UI text before modifying
         [SerializeField]
-        private PlayerStats playerStats;
-        private string highScoreOnBegin;
+        private PlayerStats playerStats; //Reference to playerStats
+
 
         void Start()
         {
@@ -29,6 +31,9 @@ namespace DanielKulasSnake
             }
         }
 
+        /// <summary>
+        /// This method sets current score in UI
+        /// </summary>
         public void setScore()
         {
             if(scoreText)

@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace DanielKulasSnake
 {
-    public class PersistentSceneManager : MonoBehaviour
+    public class PersistentSceneManager : MonoBehaviour //SINGLETON
     {
         public static PersistentSceneManager instance {get; private set;}
 
@@ -21,6 +21,9 @@ namespace DanielKulasSnake
             }
         }
 
+        /// <summary>
+        /// Go to other scenes methods
+        /// </summary>
         public void goToMenuScene() 
         {
             SceneManager.LoadScene("MenuScene");

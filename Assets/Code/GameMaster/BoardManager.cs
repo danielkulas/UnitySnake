@@ -8,35 +8,30 @@ namespace DanielKulasSnake
     {
         #region Variables
         [SerializeField]
-        private int noOfPointsForApple = 1;
+        private int noOfPointsForApple = 1; //Number of points for eating an apple
         [SerializeField]
-        private int noOfPointsForSpecialApple = 10;
-        private List<GameObject> snakeParts = new List<GameObject>();
-        private List<GameObject> apples = new List<GameObject>();
-        private int noOfFieldsX;
-        private int noOfFieldsY;
-        private PositionsValidator positionsValidator;
-        private PlayerStats playerStats;
+        private int noOfPointsForSpecialApple = 10; //Number of points for eating a special apple
+        private List<Transform> snakeParts = new List<Transform>(); //List of snake body parts 
+        private List<Transform> apples = new List<Transform>(); //List of apples 
+        private int noOfFieldsX; //Number of fields vertically
+        private int noOfFieldsY; //Number of fields horizontally
+        private PositionsValidator positionsValidator; //Reference to positionsValidator
+        private PlayerStats playerStats; //Referece to playerStats
         #endregion
 
 
         #region Parameters
-        public Vector3 getLastSnakePartPos()
-        {
-            return snakeParts[snakeParts.Count - 1].transform.position;
-        }
-
-        public void addSnakePart(GameObject snakePart)
+        public void addSnakePart(Transform snakePart)
         {
             snakeParts.Add(snakePart);
         }
 
-        public void addApple(GameObject apple)
+        public void addApple(Transform apple)
         {
             apples.Add(apple);
         }
 
-        public void removeApple(GameObject apple)
+        public void removeApple(Transform apple)
         {
             apples.Remove(apple);
         }
@@ -63,11 +58,14 @@ namespace DanielKulasSnake
             checkEndGame();
         }
 
+        /// <summary>
+        /// Checks if the snake ate an apple
+        /// </summary>
         private void checkSnakeAteApple()
         {
             if(positionsValidator)
             {
-                GameObject eatenApple = positionsValidator.doesSnakeAteApple(snakeParts, apples);
+                Transform eatenApple = positionsValidator.doesSnakeAteApple(snakeParts, apples);
                 if(eatenApple != null)
                 {
                     if(eatenApple.tag == "Special")
@@ -83,11 +81,14 @@ namespace DanielKulasSnake
                     snakeParts[0].GetComponent<SnakeController>().grow();
                     snakeParts[0].GetComponent<AudioSource>().Play();
                     apples.Remove(eatenApple);
-                    Destroy(eatenApple);
+                    Destroy(eatenApple.gameObject);
                 }
             }
         }
 
+        /// <summary>
+        /// Checks if the game should end(snake collisions)
+        /// </summary>
         private void checkEndGame()
         {
             if(positionsValidator)
@@ -99,7 +100,7 @@ namespace DanielKulasSnake
                 }
             }
         }
-
+        
         private void endGame()
         {
             PersistentSceneManager.instance.goToGameOverScene();

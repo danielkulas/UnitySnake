@@ -386,6 +386,16 @@ PrefabInstance:
       propertyPath: boardManager
       value: 
       objectReference: {fileID: 661399591}
+    - target: {fileID: 2810974919827515140, guid: 54770cc1aa2956f85b3be2a583358564,
+        type: 3}
+      propertyPath: snakeLength
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2810974919827515140, guid: 54770cc1aa2956f85b3be2a583358564,
+        type: 3}
+      propertyPath: initialSnakeLength
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2810974919827515141, guid: 54770cc1aa2956f85b3be2a583358564,
         type: 3}
       propertyPath: m_Enabled

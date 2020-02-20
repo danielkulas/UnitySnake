@@ -8,49 +8,62 @@ namespace DanielKulasSnake
     {
         #region Variables
         [SerializeField]
-        private BoardManager boardManager;
+        private BoardManager boardManager; //Reference to boardManager
         [SerializeField]
-        private GameObject snakeBodyPartPrefab;
-        private SnakeBaseInput input;
+        private GameObject snakeBodyPartPrefab; //Prefab of the snake body
+        private SnakeBaseInput input; //Reference to snakeBaseInput
         [Range(0.05f,2.0f)]
         [SerializeField]
         [Tooltip("In seconds(speed)")]
-        private float timeToNextMove = 0.2f;
-        [Range(2,5)]
+        private float timeToNextMove = 0.2f; //Determines time to next move(in seconds)
+        [Range(1,5)]
         [SerializeField]
-        private int initialSnakeLength = 5;
+        private int initialSnakeLength = 5; //Snake lenght on beginning
+        /// <summary>
+        /// Current snake length. 1 - only head.
+        /// On beginning(Start method) snake will grow to initialSnakeLength
+        /// </summary>
         private int snakeLength = 1;
-        private Vector2 movement = Vector2.up;
-        private List<Vector3> positionHistory = new List<Vector3>();
-        private List<GameObject> snakeBodyParts = new List<GameObject>();
+        private Vector2 movement = Vector2.up; //Vector of movement. Determines direction of next move
+        /// <summary>
+        /// Snake history positions.
+        /// Snake root saves its positions, snake bodyparts follow these positions
+        /// </summary>
+        private List<Vector2> positionHistory = new List<Vector2>();
+        private List<GameObject> snakeBodyParts = new List<GameObject>(); //List of all snake parts
         #endregion
 
         #region Methods
         void Start()
         {
-            input = GetComponent<SnakeBaseInput>();
+            input = GetComponent<SnakeBaseInput>(); //Keyboard
 
             if(!input.isActiveAndEnabled)
-                input = GetComponent<SnakeTouchScreenInput>();
+                input = GetComponent<SnakeTouchScreenInput>(); //Touch screen
 
-            transform.position = new Vector3Int(0, 4, (int)transform.position.z);
+            transform.position = new Vector3Int(4, 4, (int)transform.position.z);
             InvokeRepeating("move", timeToNextMove, timeToNextMove);
-
             setInitialLen();
         }
 
+        /// <summary>
+        /// This method adds snake body parts(to initialSnakeLength)
+        /// </summary>
         private void setInitialLen()
         {
-            boardManager.addSnakePart(this.gameObject);
+            boardManager.addSnakePart(this.gameObject.transform);
 
             for(int i = 0; i < initialSnakeLength - 1; i++)
             {
-                Vector3 historyPos = new Vector3(transform.position.x, transform.position.y - (float)i - 1.0f, transform.position.z);
+                Vector2 historyPos = new Vector2(transform.position.x, transform.position.y - (float)i - 1.0f);
                 positionHistory.Insert(i, historyPos);
                 grow();
             }
         }
 
+        /// <summary>
+        /// This method takes inputs from SnakeBaseInput and sets movement vector
+        /// </summary>
         private void move()
         { 
             Vector2 tmp = movement;
@@ -78,9 +91,7 @@ namespace DanielKulasSnake
                     tmp = Vector2.up;
             }
 
-            positionHistory.Insert(0, transform.position);
-            if(positionHistory.Count > snakeLength + 1)
-                positionHistory.RemoveAt(positionHistory.Count - 1);
+            setPosHistory();
 
             movement = tmp;
             transform.position += (Vector3)movement;
@@ -89,6 +100,20 @@ namespace DanielKulasSnake
             boardManager.validatePosition();
         }
 
+        /// <summary>
+        /// This method adds current position to positionHistory list
+        /// If there are too many positions, it removes them
+        /// </summary>
+        private void setPosHistory()
+        {
+            positionHistory.Insert(0, transform.position);
+            if(positionHistory.Count > snakeLength + 1)
+                positionHistory.RemoveAt(positionHistory.Count - 1);
+        }
+
+        /// <summary>
+        /// This method sets snake body parts positions(based on positionHistory)
+        /// </summary>
         private void setSnakeBodyPartsPos()
         {
             for(int i = 0; i < snakeBodyParts.Count; i++)
@@ -97,13 +122,15 @@ namespace DanielKulasSnake
             }
         }
 
+        /// <summary>
+        /// This method adds new body part to snake
+        /// </summary>
         public void grow()
         {
             GameObject newBodyPart = Instantiate(snakeBodyPartPrefab, transform.position, Quaternion.identity);
             newBodyPart.transform.SetParent(transform);
-            newBodyPart.transform.position = boardManager.getLastSnakePartPos();
             snakeBodyParts.Add(newBodyPart);
-            boardManager.addSnakePart(newBodyPart);
+            boardManager.addSnakePart(newBodyPart.transform);
             snakeLength++;
             setSnakeBodyPartsPos();
         }

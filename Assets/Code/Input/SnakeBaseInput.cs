@@ -11,6 +11,9 @@ namespace DanielKulasSnake
         #endregion
 
 
+        /// <summary>
+        /// After get request, field(left or right) is reset
+        /// </summary>
         #region Properties
         public bool Left   
         {
@@ -38,6 +41,9 @@ namespace DanielKulasSnake
             handleInput();
         }
 
+        /// <summary>
+        /// It checks if turn command was invoked
+        /// </summary>
         public virtual void handleInput() 
         {
             if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
@@ -46,6 +52,9 @@ namespace DanielKulasSnake
                 right = true;
         }
 
+        /// <summary>
+        /// This method reset left and right fields.
+        /// </summary>
         public void resetInputs() 
         {
             left = false;

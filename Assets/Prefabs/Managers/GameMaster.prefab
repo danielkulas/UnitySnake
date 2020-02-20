@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2393229953005300944
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2393229953005300951}
+  - component: {fileID: 2393229953005300950}
+  - component: {fileID: 1324291666}
+  - component: {fileID: 690178724}
+  - component: {fileID: 5726386126709742348}
+  - component: {fileID: 6723027391535610753}
+  m_Layer: 0
+  m_Name: GameMaster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2393229953005300951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2393229953005300944}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2393229953005300950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2393229953005300944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813721157245ae3e2aa586f214764bfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgLightFieldPrefab: {fileID: 537638807747727984, guid: ab894b1f8cf11d41c95765affd27fbeb,
+    type: 3}
+  bgDarkFieldPrefab: {fileID: 6685660824993904794, guid: 9f0f166cd48305079a1dd01e6fc681c5,
+    type: 3}
+  noOfFieldsX: 10
+  noOfFieldsY: 15
+--- !u!114 &1324291666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2393229953005300944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 117889ccfdfa0fdf999b7852d7cf8b4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noOfPointsForApple: 1
+  noOfPointsForSpecialApple: 10
+--- !u!114 &690178724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2393229953005300944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510da794db144b028bf1ee877b825b96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5726386126709742348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2393229953005300944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f12934a4a6bac10a881af5b36857a0cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  applePrefab: {fileID: 5080948914459463713, guid: c8eba64f227d2285f9982a080f2d7819,
+    type: 3}
+  specialApplePrefab: {fileID: 438614939594712169, guid: 7d829465ff3b41a80960f460a1880560,
+    type: 3}
+  flickingTime: 3
+  minTimeOfLife: 5
+  maxTimeOfLife: 10
+  minIntervalBetweenSpawns: 18
+  maxInterfalBetweenSpawns: 28
+--- !u!114 &6723027391535610753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2393229953005300944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb50e0a759c7ba3cab84767dc8ce4a29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textScoreSetter: {fileID: 0}
